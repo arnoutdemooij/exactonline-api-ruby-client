@@ -8,7 +8,7 @@ module Elmas
   module Config
     include ThreadsafeAttributes
     # An array of valid keys in the options hash
-    VALID_OPTIONS_KEYS = %i(
+    VALID_OPTIONS_KEYS = %w(
       access_token
       adapter
       client_id
