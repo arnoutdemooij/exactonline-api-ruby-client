@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require "faraday"
-#require "active_resource/threadsafe_attributes"
+require "active_resource/threadsafe_attributes"
 require "logger"
 
 module Elmas
   module Config
-    #include ThreadsafeAttributes
+    include ThreadsafeAttributes
     # An array of valid keys in the options hash
     VALID_OPTIONS_KEYS = %i(
       access_token
@@ -66,7 +66,7 @@ module Elmas
     DEFAULT_LOGGER = ::Logger.new(STDOUT)
 
     # @private
-    #threadsafe_attribute(*VALID_OPTIONS_KEYS)
+    threadsafe_attribute(*VALID_OPTIONS_KEYS)
 
     # When this module is extended, set all configuration options to their default values
     def self.extended(base)
@@ -81,7 +81,7 @@ module Elmas
     # Create a hash of options and their values
     def options
       VALID_OPTIONS_KEYS.map do |key|
-        [key, send(key)]
+        [key, send(key.to_s)]
       end.to_h
     end
 
