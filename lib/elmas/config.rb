@@ -80,9 +80,9 @@ module Elmas
 
     # Create a hash of options and their values
     def options
-      VALID_OPTIONS_KEYS.inject({}) do |option, key|
-        option.merge!(key => send(key))
-      end
+      VALID_OPTIONS_KEYS.map do |key|
+        [key, send(key)]
+      end.to_h
     end
 
     # Reset all configuration options to defaults

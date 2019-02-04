@@ -16,6 +16,8 @@ module Elmas
   # rubocop:disable Metrics/ModuleLength
   module OAuth
     def authorized?
+      return false
+
       # Do a test call, return false if 401 or any error code
       response = Elmas.get("/Current/Me", no_division: true)
       response.results.first.present?
