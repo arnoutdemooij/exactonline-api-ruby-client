@@ -8,7 +8,7 @@ module Elmas
   module Config
     include ThreadsafeAttributes
     # An array of valid keys in the options hash
-    VALID_OPTIONS_KEYS = %w(
+    VALID_OPTIONS_KEYS = %i(
       access_token
       adapter
       client_id
@@ -32,7 +32,7 @@ module Elmas
     # The adapter that will be used to connect if none is set
     #
     # @note The default faraday adapter is Net::HTTP.
-    DEFAULT_ADAPTER = Faraday.default_adapter
+    DEFAULT_ADAPTER = Faraday.default_adapter.to_s
 
     # By default, client id should be set in .env
     DEFAULT_CLIENT_ID = ""
@@ -53,7 +53,7 @@ module Elmas
 
     # The response format appended to the path and sent in the 'Accept' header if none is set
     #
-    DEFAULT_FORMAT = :json
+    DEFAULT_FORMAT = 'json'
 
     DEFAULT_REDIRECT_URI = "https://www.getpostman.com/oauth2/callback"
 
@@ -61,7 +61,7 @@ module Elmas
     DEFAULT_USER_AGENT = nil
 
     # An array of valid request/response formats
-    VALID_FORMATS = [:json].freeze
+    VALID_FORMATS = ['json'].freeze
 
     DEFAULT_LOGGER = ::Logger.new(STDOUT)
 
@@ -81,7 +81,7 @@ module Elmas
     # Create a hash of options and their values
     def options
       VALID_OPTIONS_KEYS.map do |key|
-        [key, send(key.to_s)]
+        [key, send(key)]
       end.to_h
     end
 
